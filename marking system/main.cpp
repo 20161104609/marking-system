@@ -11,7 +11,9 @@
 #include <String>
 int n ;
 using namespace std;
-struct  marking  {//参赛人员信息
+
+struct  marking
+{//参赛人员信息
     string  name;
     string  sex;
     string  Class;
@@ -24,7 +26,8 @@ struct  marking  {//参赛人员信息
     
     
 };
-struct referee {//裁判
+struct referee
+{//裁判
     string name;
     string sex;
     string tel;
@@ -80,13 +83,7 @@ void  put(referee *r)//裁判信息
     }
     
 }
-void  output (marking *m ,int n )//输出参赛人员信息
-{  int i;
-    for(i=0;i<n;i++)
-    {
-        cout<<"名字："<<m[i].name<<"性别："<<m[i].sex<<"班级："<<m[i].Class<<"项目："<<m[i].form<<"电话："<<m[i].tel<<"成绩1："<<m[i].score[1]<<"成绩2："<<m[i].score[2]<<"成绩3："<<m[i].score[3]<<"成绩4："<<m[i].score[4]<<"成绩5："<<m[i].score[5]<<endl;
-    }
-}
+
 void ave(marking *m , int n)//求平均成绩
 {
     int i;
@@ -111,8 +108,8 @@ void ave(marking *m , int n)//求平均成绩
         m[i].sum = m[i].sum - max - min;
         //aver=m[i].sum/=3;
         m[i].aver=m[i].sum/3;
-        cout<<"max:"<<max;
-        cout<<"min:"<<min;
+        cout<<"max:"<<max<<endl;
+        cout<<"min:"<<min<<endl;
         cout<<"Calculate complete!\n";
         cout<<m[i].aver;
     }
@@ -121,7 +118,7 @@ void ave(marking *m , int n)//求平均成绩
     
     
 }
-void change(marking *m)
+void change(marking *m)//修改函数
 {
     int i;
     int q;
@@ -171,9 +168,46 @@ void change(marking *m)
     
     
     
+
+}
+void del(marking *m)//删除函数
+{
+    int i;
+    //int h;
+    int q;
+    cout<<"请输出要删除的号码:"<<endl;
+    cin>>q;
+    struct  marking k;
+    for (i=1; i<=n; )
+    {
+        if(m[i].number!=q)
+        {
+            i++;
+        }
+        else{
+            n--;
+        }
+    }
+    /*k=m[h];
+    for (h=i;h<n; h++)
+    {
+        m[h]=m[h-1];
+        n--;
+    }*/
+    cout<<"delete succeed!!!!";
+}
+void  output (marking *m )//输出参赛人员信息
+{  int i;
+    for(i=0;i<n;i++)
+    {
+        cout<<"名字："<<m[i].name<<"性别："<<m[i].sex<<"班级："<<m[i].Class<<"项目："<<m[i].form<<"电话："<<m[i].tel<<"成绩1："<<m[i].score[1]<<"成绩2："<<m[i].score[2]<<"成绩3："<<m[i].score[3]<<"成绩4："<<m[i].score[4]<<"成绩5："<<m[i].score[5]<<endl;
+    }
 }
 void menu()
 {
+    
+    
+    
     
     cout<<"                    | -----------------------------\n";
     cout<<"                    |         评分系统              \n";
@@ -186,17 +220,21 @@ void menu()
     cout<<"                    |       4---排名参赛人员信息       \n";
     cout<<"                    |       5---参赛人员的平均成绩     \n";
     cout<<"                    |       6---显示才赛人员的信息     \n";
+    cout<<"                    |       7---删除参赛人员信息       \n";
     cout<<"                    |       0---退出系统             \n";
     cout<<"                    | ----------------------------- \n";
+    
+    
+   
     
     
     
 }
 
-
+ struct  marking  m [100];
 int main(int argc, const char * argv[]) {
     // insert code here...
-    struct  marking  m [100];
+    //struct  marking  m [100];
     struct referee r[10];
     menu();//运行主菜单
     //load(L);//读取学生存入的数据
@@ -211,7 +249,8 @@ int main(int argc, const char * argv[]) {
             case 3: change(m);break;
                 //case 4: sort(L);break;
             case 5:ave(m,n); break;
-            case 6:output(m,n);break;
+            case 6:output(m);break;
+            case 7:del(m);break;
             case 0:
                 //save(L);
                 exit(0);
