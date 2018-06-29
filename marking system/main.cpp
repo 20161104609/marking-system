@@ -17,7 +17,7 @@ struct  marking  {//参赛人员信息
     string  Class;
     string  form;
     string   tel;
-    int numeber;
+    int number;
     double  score[10];
     double sum;
     double aver;
@@ -40,7 +40,7 @@ void intput(marking *m)//参赛人员信息
         cout<<"name:"<<endl;
         cin>>m[i].name;
         cout<<"number:"<<endl;
-        cin>>m[i].numeber;
+        cin>>m[i].number;
         cout<<"sec:"<<endl;
         cin>>m[i].sex;
         cout<<"class:"<<endl;
@@ -121,12 +121,15 @@ void ave(marking *m , int n)//求平均成绩
     
     
 }
-void change(marking *m, int number)
+void change(marking *m)
 {
     int i;
-    int s,q;
-    for (i=0; i<m[0].numeber; ) {
-        if(m[i].numeber!=q)
+    int q;
+    cout<<"请输出要修改的号码:"<<endl;
+    cin>>q;
+    struct  marking s;
+    for (i=0; i<n; ) {
+        if(m[i].number!=q)
         {
             i++;
         }
@@ -134,41 +137,57 @@ void change(marking *m, int number)
             break;
         }
     }
-    while(q!=null)
-    {cout<<"找到该参赛人员！"<<m[i].name<<endl;
-        cin>>s;
-        switch (s) {
-            case 1:cout<<"name：";cin>>m[i].name;break;
-            case 2:cin>>m[i].sex;break;
-            case 3:cin>>m[i].Class;break;
-            case 4:cin>>m[i].form;break;
-            case 5:cin>>m[i].tel;break;
-            case 6:cin>>m[i].score[1];break;
-            case 7:cin>>m[i].score[2];break;
-            case 8:cin>>m[i].score[3];break;
-            case 9:cin>>m[i].score[4];break;
-            case 10:cin>>m[i].score[5];break;
-        }
-    }
+    cout<<i<<endl;
+    cout<<"请输出入新的参赛人姓名："<<endl;
+    cin>>s.name;
+    m[i].name=s.name;
+    cout<<"请输出入新的参赛人性别："<<endl;
+    cin>>s.sex;
+    m[i].sex=s.sex;
+    cout<<"请输出入新的参赛人班级："<<endl;
+    cin>>s.Class;
+    m[i].Class=s.Class;
+    cout<<"请输出入新的参赛人电话号码："<<endl;
+    cin>>s.tel;
+    m[i].tel=s.tel;
+    cout<<"请输出入新的参赛人类别："<<endl;
+    cin>>s.form;
+    m[i].form=s.form;
+    cout<<"请输出入新的参赛人成绩1："<<endl;
+    cin>>s.score[1];
+    m[i].score[1]=s.score[1];
+    cin>>s.score[2];
+    cout<<"请输出入新的参赛人成绩2："<<endl;
+    m[i].score[2]=s.score[2];
+    cin>>s.score[3];
+    cout<<"请输出入新的参赛人成绩3："<<endl;
+    m[i].score[3]=s.score[3];
+    cout<<"请输出入新的参赛人成绩4："<<endl;
+    cin>>s.score[4];
+    m[i].score[4]=s.score[4];
+    cout<<"请输出入新的参赛人成绩5："<<endl;
+    cin>>s.score[5];
+    m[i].score[5]=s.score[5];
+    
     
     
 }
 void menu()
 {
     
-    printf("                    | ----------------------------- |\n");
-    printf("                    |         评分系统              |\n");
-    printf("                    | ----------------------------- |\n");
-    printf("                    |            菜单栏             |\n");
-    printf("                    | ----------------------------- |\n");
-    printf("                    |       1---录入参赛人员信息    |\n");
-    printf("                    |       2---录入裁判信息        |\n");
-    printf("                    |       3---修改参赛人员信息    |\n");
-    printf("                    |       4---排名参赛人员信息    |\n");
-    printf("                    |       5---参赛人员的平均成绩  |\n");
-    printf("                    |       6---显示才赛人员的信息  |\n");
-    printf("                    |       0---退出系统            |\n");
-    printf("                    | ----------------------------- |\n");
+    cout<<"                    | -----------------------------\n";
+    cout<<"                    |         评分系统              \n";
+    cout<<"                    | -----------------------------\n";
+    cout<<"                    |            菜单栏             \n";
+    cout<<"                    | -----------------------------\n";
+    cout<<"                    |       1---录入参赛人员信息       \n";
+    cout<<"                    |       2---录入裁判信息          \n";
+    cout<<"                    |       3---修改参赛人员信息       \n";
+    cout<<"                    |       4---排名参赛人员信息       \n";
+    cout<<"                    |       5---参赛人员的平均成绩     \n";
+    cout<<"                    |       6---显示才赛人员的信息     \n";
+    cout<<"                    |       0---退出系统             \n";
+    cout<<"                    | ----------------------------- \n";
     
     
     
@@ -189,7 +208,7 @@ int main(int argc, const char * argv[]) {
         {
             case 1: intput(m);break;
             case 2: put(r);break;
-            case 3: change(m,n);break;
+            case 3: change(m);break;
                 //case 4: sort(L);break;
             case 5:ave(m,n); break;
             case 6:output(m,n);break;
