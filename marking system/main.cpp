@@ -177,7 +177,6 @@ void del(marking *m)//删除函数
     int q;
     cout<<"请输出要删除的号码:"<<endl;
     cin>>q;
-    struct  marking k;
     for (i=1; i<=n; )
     {
         if(m[i].number!=q)
@@ -231,10 +230,29 @@ void menu()
     
 }
 
- struct  marking  m [100];
+void save(marking *m)
+{
+  
+        int i;
+        FILE* fp;
+        fp = fopen("/Users/a20161104609/Desktop/markingsystem/marking／student.txt", "w");
+        if(fp == NULL)
+            printf("The file can't be opened!\n");
+        else
+        {
+            for(i=0; i<n; i++)
+            {
+                fprintf(fp,"%s %s %s %s %s %f %f %f %f %f",m[i].name.c_str(), m[i].sex.c_str(),m[i].Class.c_str(),m[i].form.c_str(), m[i].tel.c_str(),m[i].score[1],m[i].score[2],m[i].score[3],m[i].score[4],m[i].score[5]);
+            }
+            printf("\t\t\t 保存成功！！！d\n");
+            fclose(fp);
+            return;
+        }
+   
+}
 int main(int argc, const char * argv[]) {
     // insert code here...
-    //struct  marking  m [100];
+    struct  marking  m [100];
     struct referee r[10];
     menu();//运行主菜单
     //load(L);//读取学生存入的数据
@@ -252,7 +270,7 @@ int main(int argc, const char * argv[]) {
             case 6:output(m);break;
             case 7:del(m);break;
             case 0:
-                //save(L);
+                save(m);
                 exit(0);
                 break;
         }
