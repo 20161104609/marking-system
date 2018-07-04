@@ -19,7 +19,7 @@ struct  marking
     string  Class;
     string  form;
     string   tel;
-    int number;
+    int number;//bianhao
     double  score[10];
     double sum;
     double aver;
@@ -36,9 +36,22 @@ struct referee
 void intput(marking *m)//参赛人员信息
 {
     int i;
-    cout<<"输入参赛人员的个数:"<<endl;
-    cin>>n;
-    for(i=0;i<n;i++)
+    int j;
+    int flag=1;
+    cout<<"请要插入参赛人员学号位置:"<<endl;
+    cin>>j;
+    struct  marking s;
+    for (i=0; i<n; ) {
+        if(m[i].number!=j)
+        {
+            i++;
+        }
+        else{
+            break;
+        }
+    }
+   
+    while(flag)
     {
         cout<<"name:"<<endl;
         cin>>m[i].name;
@@ -63,9 +76,9 @@ void intput(marking *m)//参赛人员信息
         cin>>m[i].score[4];
         cout<<"成绩5:"<<endl;
         cin>>m[i].score[5];
-        m[i].sum=m[i].score[1]+m[i].score[2]+m[i].score[3]+m[i].score[4]+m[i].score[5];
-        
-        
+        //m[i].sum=m[i].score[1]+m[i].score[2]+m[i].score[3]+m[i].score[4]+m[i].score[5];
+        n++;
+        flag=0;
         
     }
 }
@@ -107,6 +120,7 @@ void ave(marking *m , int n)//求平均成绩
         }
         m[i].sum = m[i].sum - max - min;
         //aver=m[i].sum/=3;
+        cout<<m[i].sum;
         m[i].aver=m[i].sum/3;
         cout<<"max:"<<max<<endl;
         cout<<"min:"<<min<<endl;
@@ -175,6 +189,7 @@ void del(marking *m)//删除函数
     int i;
     //int h;
     int q;
+    //struct marking k;
     cout<<"请输出要删除的号码:"<<endl;
     cin>>q;
     for (i=1; i<=n; )
@@ -184,15 +199,11 @@ void del(marking *m)//删除函数
             i++;
         }
         else{
-            n--;
+    
+            m[i]=m[i+1];
+            
         }
-    }
-    /*k=m[h];
-    for (h=i;h<n; h++)
-    {
-        m[h]=m[h-1];
-        n--;
-    }*/
+    }n--;
     cout<<"delete succeed!!!!";
 }
 void  output (marking *m )//输出参赛人员信息
