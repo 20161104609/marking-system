@@ -13,16 +13,43 @@
 //  Created by 20161104609 on 18/7/5.
 //  Copyright © 2018年 20161104609. All rights reserved.
 //
-
-#include <cstdio>
 #include <cstring>
 #include <iostream>
 using namespace std;
+struct referee
+{//裁判
+    string name;
+    string sex;
+    string tel;
+};
+void  put(referee *r)//裁判信息
+{   int i;
+    cout<<"输入裁判信息:"<<endl;
+    for(i=0;i<5;i++)
+    {
+        cout<<"name:";
+        cin>>r[i].name;
+        cout<<"sec:";
+        cin>>r[i].sex;
+        cout<<"tel:";
+        cin>>r[i].tel;
+        cout<<"once  change succeed!!"<<endl;
+        
+    }
+}
+
+void  output (referee *r)//输出裁判人员信息
+{  int i;
+    for(i=0;i<5;i++)
+    {
+        cout<<"名字："<<r[i].name<<"性别："<<r[i].sex<<"电话号码："<<r[i].tel<<endl;
+    }
+}
 
 class student       // student 类为管理系统的一个节点
 {
-    friend class studentMessage;
-    student      *next;
+    friend class studentMessage;//声明一个有类
+    student      *next;//定义类的节点
     char         name[30];
     char         num[30];
     char         Class[10];
@@ -43,7 +70,7 @@ public:
         averageScore=0;
         for (int i = 0; i < 6; ++i) score[i] = 0;//初始化
     }
-    student(const student &a)
+    student(const student &a)//设置成为常量
     {
         strcpy(name, a.name);
         strcpy(num, a.num);
@@ -321,13 +348,15 @@ studentMessage &studentMessage::Sort()
 void studentMessage::menu()
 {
     cout << "===============================\n";
-    cout << "      学生成绩管理系统\n\n";
-    cout << "      1.显示所有学生成绩\n";
-    cout << "      2.添加信息\n";
-    cout << "      3.查询信息\n";
-    cout << "      4.删除信息\n";
-    cout << "      5.成绩排序\n";
-    cout << "      6.删除所有信息\n";
+    cout << "      裁判及其参赛人员成绩管理系统\n\n";
+    cout << "      1.参赛人员显示排序后的成绩\n";
+    cout << "      2.添加参赛人员信息\n";
+    cout << "      3.查询参赛人员信息\n";
+    cout << "      4.删除参赛人员信息\n";
+    cout << "      5.运行参赛人员成绩排序程序\n";
+    cout << "      6.删除参赛人员所有信息\n";
+    cout << "      7.输入裁判信息\n";
+    cout << "      8.输出裁判信息\n";
     cout << "      0.退出\n";
     cout << "===============================\n";
     
@@ -336,9 +365,10 @@ void studentMessage::menu()
 
 int main()
 {
-    studentMessage L;
+    studentMessage L;//声明有类的对象
+    struct referee r[10];
     int a ;
-    L.menu();
+    L.menu();//运行主菜单
     
     while (cin>>a)
     {
@@ -350,6 +380,9 @@ int main()
             case 4: L.Delete(); break;
             case 5: L.Sort(); break;
             case 6: L.Clear(); break;
+            case 7: put(r); break;
+            case 8: output(r); break;
+            
         }
     }
     
