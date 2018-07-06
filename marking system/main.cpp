@@ -3,7 +3,7 @@
 //  marking system
 //
 //  Created by 20161104609 on 18/6/25.
-//  Copyright © 2018年 20161104609. All rights reserved.
+//  Copyright ? 2018年 20161104609. All rights reserved.
 //
 
 //
@@ -11,7 +11,7 @@
 //  marking
 //
 //  Created by 20161104609 on 18/7/5.
-//  Copyright © 2018年 20161104609. All rights reserved.
+//  Copyright ? 2018年 20161104609. All rights reserved.
 //
 #include <cstring>
 #include <iostream>
@@ -98,20 +98,18 @@ public:
         }//求平均函数
         double max = score[0];
         double min = score[0];
-        int maxi = 0;
-        int mini = 0;
         int k;
         for( k = 0; k < 5; k++) {
             if( max < score[k]) {
                 max = score[k];
-                maxi = k;
+                
             }
             if( min > score[k]) {
                 min = score[k];
-                mini = k;
+                
             }
             averageScore += score[k];
-       }
+        }
         averageScore=averageScore-max-min;
         cout<<"最大值"<<max<<endl;
         cout<<"最小值:"<<min<<endl;
@@ -123,19 +121,19 @@ public:
         return next;
     }
     
-   
+    
     void print()
     {
         printf("%8s %8s %8s %7s %8s %12s ", name, sex,num,Class,form,tel);
         for (int i = 0; i < 6; ++i) printf(" %8.2f ", score[i]);
-        printf("%8.2lf",averageScore);
+        printf("%8.2f",averageScore);
         printf("\n");
     }
     
-
+    
     void Swap() // 交换当前结点和下一个
     {
-        char temp[30];
+        char temp[300];
         strcpy(temp, name);
         strcpy(name, next->name);
         strcpy(next->name, temp);
@@ -159,21 +157,21 @@ public:
         strcpy(temp, tel);
         strcpy(tel, next->tel);
         strcpy(next->tel, temp);
-
-        for (int i = 0; i < 6; ++i)
+        
+        for (int i = 0; i < 6; i++)
         {
             int tmp = score[i];
             score[i] = next->score[i];
             next->score[i] = tmp;
         }
         for (int i=0;i<6; i++) {
-         int tmp=averageScore;
-           averageScore = next->averageScore;
-           next->averageScore = tmp;
+            int tmp=averageScore;
+            averageScore = next->averageScore;
+            next->averageScore = tmp;
             
         }
         
-
+        
     }
     
 };
@@ -199,12 +197,13 @@ public:
     studentMessage &Delete();           // 删除查找结点
     studentMessage &Clear();            // 删除所有结点
     studentMessage &Sort();             // 按第i门课排序
+    studentMessage &save();              //保存函数
     void print();                       // 显示所有节点
     void menu();                         // 显示菜单
     
 };
 
-studentMessage &studentMessage::Append()
+studentMessage &studentMessage::Append()//设置好头结点是链表能连续
 {
     student x;
     x.input();
@@ -255,7 +254,7 @@ studentMessage &studentMessage::Delete()
 
 studentMessage &studentMessage::Clear()
 {
-    char m [30];
+    char m [300];
     cout << "将删除所有信息。确认请按Y";
     cin >> m;
     if (*m != 'Y' && *m  != 'y')
@@ -344,6 +343,39 @@ studentMessage &studentMessage::Sort()
     }
     return *this;
 }
+studentMessage &studentMessage::save()
+{
+    student *ptr, *hou = last;
+    ptr = first;
+    int i;
+   	FILE *fp = NULL;
+    if((fp = fopen("/Users/a20161104609/Desktop/markingsystem/markingstystem.csv","w")) != NULL )
+    {
+        fprintf(fp,"%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s\n","姓名:","性别：","班级：","项目名称：","联系方式:","成绩1：","成绩2：","成绩3：","成绩4：","成绩5：","总成绩：");
+        while (ptr != hou)
+  				  {
+                      fprintf(fp,"%s ,%s, %s ,%s, %s,",ptr->name,ptr->sex,ptr->Class,ptr->form,ptr->tel);
+                      for ( i= 0; i <6; )
+                      {
+                          fprintf(fp,"%f,",ptr->score[i]);
+                          i++;
+                      }
+                      fprintf(fp,"\n");
+                      ptr = ptr->next;
+                  }
+        
+        
+        
+    }
+    fclose(fp);
+    
+    return *this;
+}
+
+
+
+
+
 
 void studentMessage::menu()
 {
@@ -382,7 +414,8 @@ int main()
             case 6: L.Clear(); break;
             case 7: put(r); break;
             case 8: output(r); break;
-            
+            case 0: L.save();break; 
+                
         }
     }
     
