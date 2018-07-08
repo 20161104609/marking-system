@@ -6,24 +6,22 @@
 //  Copyright ? 2018年 20161104609. All rights reserved.
 //
 
-//
-//  main.cpp
-//  marking
-//
-//  Created by 20161104609 on 18/7/5.
-//  Copyright ? 2018年 20161104609. All rights reserved.
-//
 #include <cstring>
 #include <iostream>
+
 using namespace std;
 struct referee
+
 {//裁判
     string name;
     string sex;
     string tel;
 };
+
 void  put(referee *r)//裁判信息
-{   int i;
+{
+    int i;
+    
     cout<<"输入裁判信息:"<<endl;
     for(i=0;i<5;i++)
     {
@@ -35,11 +33,13 @@ void  put(referee *r)//裁判信息
         cin>>r[i].tel;
         cout<<"once  change succeed!!"<<endl;
         
+    
     }
 }
 
 void  output (referee *r)//输出裁判人员信息
-{  int i;
+{
+    int i;
     for(i=0;i<5;i++)
     {
         cout<<"名字："<<r[i].name<<"性别："<<r[i].sex<<"电话号码："<<r[i].tel<<endl;
@@ -58,7 +58,7 @@ class student       // student 类为管理系统的一个节点
     char         sex[10];
     double       score[6];
     double       averageScore;//平均成绩
-public:
+    public:
     student()
     {
         strcpy(name, "null");
@@ -111,7 +111,7 @@ public:
             averageScore += score[k];
         }
         averageScore=averageScore-max-min;
-        cout<<"最大值"<<max<<endl;
+        cout<<"最大值:"<<max<<endl;
         cout<<"最小值:"<<min<<endl;
         averageScore /= 3;
         return *this;
@@ -164,6 +164,7 @@ public:
             score[i] = next->score[i];
             next->score[i] = tmp;
         }
+        
         for (int i=0;i<6; i++) {
             int tmp=averageScore;
             averageScore = next->averageScore;
@@ -178,19 +179,23 @@ public:
 
 class studentMessage
 {
-protected:
+    
+    protected:
     student *first;
     student *last;
-public:
+    
+    public:
     studentMessage()
     {
         first = last = new student;
     }
+    
     ~studentMessage()
     {
         Clear();
         delete first;
     }
+    
     studentMessage &Append();           // 在链表尾部插入节点
     student *Find(const char *x);       // 查找
     void Query();                       // 查询
@@ -214,7 +219,7 @@ studentMessage &studentMessage::Append()//设置好头结点是链表能连续
     return *this;
 }
 
-studentMessage &studentMessage::Delete()
+studentMessage &studentMessage::Delete()//删除学生信息
 {
     char x[30];
     cout << "输入要删除的信息（学号或姓名）\n";
@@ -304,7 +309,7 @@ student *studentMessage::Find(const char *x)
     return ptr;
 }
 
-void studentMessage::Query()
+void studentMessage::Query()//查找函数
 {
     char x[30];
     cout << "输入你要查询的信息(学号或姓名)";
@@ -368,6 +373,7 @@ studentMessage &studentMessage::save()
         
     }
     fclose(fp);
+    cout<<"保存文件写入成功！"<<endl;
     
     return *this;
 }
@@ -417,6 +423,8 @@ int main()
             case 0: L.save();break; 
                 
         }
+        L.menu();
+        
     }
     
     
